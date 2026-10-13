@@ -410,9 +410,9 @@ Dashboardの初期イメージ：
 │                                          │
 │ Most Modified Assets                     │
 │                                          │
-│ BP_Player                    22 changes   │
-│ GA_Attack                    14 changes   │
-│ WBP_HUD                       9 changes   │
+│ BP_Player                    22 changes  │
+│ GA_Attack                    14 changes  │
+│ WBP_HUD                       9 changes  │
 │                                          │
 │ Contributor Focus                        │
 │                                          │
