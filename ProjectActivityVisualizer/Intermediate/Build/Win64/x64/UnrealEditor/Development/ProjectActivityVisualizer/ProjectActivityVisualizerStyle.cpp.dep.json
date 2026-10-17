@@ -1,0 +1,25 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\source\\projectactivityvisualizer\\private\\projectactivityvisualizerstyle.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\intermediate\\build\\win64\\x64\\activityvisualizereditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\projectactivityvisualizer\\definitions.projectactivityvisualizer.h",
+            "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\source\\projectactivityvisualizer\\public\\projectactivityvisualizerstyle.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\slatecore\\public\\styling\\slatestyleregistry.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\engine\\public\\slate\\slategameresources.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\projects\\public\\interfaces\\ipluginmanager.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\projects\\public\\plugindescriptor.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\projects\\public\\custombuildsteps.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\projects\\public\\localizationdescriptor.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\projects\\public\\moduledescriptor.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\projects\\public\\plugindisalloweddescriptor.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\projects\\public\\pluginreferencedescriptor.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\projects\\public\\versescope.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\source\\runtime\\slatecore\\public\\styling\\slatestylemacros.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

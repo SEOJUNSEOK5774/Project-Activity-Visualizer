@@ -1,0 +1,15 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.ProjectActivityVisualizer.cpp.obj": [
+			"ProjectActivitySettings.gen.cpp.obj",
+			"ProjectActivityVisualizer.init.gen.cpp.obj",
+			"PerModuleInline.gen.cpp.obj",
+			"ProjectActivitySettings.cpp.obj",
+			"ProjectActivityStorage.cpp.obj",
+			"ProjectActivityVisualizer.cpp.obj",
+			"ProjectActivityVisualizerCommands.cpp.obj",
+			"ProjectActivityVisualizerStyle.cpp.obj"
+		]
+	}
+}

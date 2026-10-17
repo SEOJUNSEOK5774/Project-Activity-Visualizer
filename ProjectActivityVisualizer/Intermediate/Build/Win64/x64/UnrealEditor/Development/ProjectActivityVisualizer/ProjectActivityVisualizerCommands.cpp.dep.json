@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\source\\projectactivityvisualizer\\private\\projectactivityvisualizercommands.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\intermediate\\build\\win64\\x64\\activityvisualizereditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\projectactivityvisualizer\\definitions.projectactivityvisualizer.h",
+            "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\source\\projectactivityvisualizer\\public\\projectactivityvisualizercommands.h",
+            "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\source\\projectactivityvisualizer\\public\\projectactivityvisualizerstyle.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

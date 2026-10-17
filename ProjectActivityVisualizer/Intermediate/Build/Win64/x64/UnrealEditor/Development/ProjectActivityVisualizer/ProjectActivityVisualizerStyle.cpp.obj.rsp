@@ -1,0 +1,14 @@
+"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Source/ProjectActivityVisualizer/Private/ProjectActivityVisualizerStyle.cpp"
+@"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/ProjectActivityVisualizer.Shared.rsp"
+/FI"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Intermediate/Build/Win64/x64/ActivityVisualizerEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h"
+/FI"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/Definitions.ProjectActivityVisualizer.h"
+/Yu"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Intermediate/Build/Win64/x64/ActivityVisualizerEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h"
+/Fp"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Intermediate/Build/Win64/x64/ActivityVisualizerEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h.pch"
+/Fo"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/ProjectActivityVisualizerStyle.cpp.obj"
+/experimental:log "C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/ProjectActivityVisualizerStyle.cpp.sarif"
+/sourceDependencies "C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/ProjectActivityVisualizerStyle.cpp.dep.json"
+/nologo
+/TP
+/GR-
+/std:c++20
+/wd5054

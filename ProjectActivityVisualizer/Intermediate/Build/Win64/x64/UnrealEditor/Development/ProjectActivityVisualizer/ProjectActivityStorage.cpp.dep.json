@@ -1,0 +1,18 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\source\\projectactivityvisualizer\\private\\projectactivitystorage.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\intermediate\\build\\win64\\x64\\activityvisualizereditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.valexpapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\projectactivityvisualizer\\definitions.projectactivityvisualizer.h",
+            "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\source\\projectactivityvisualizer\\public\\projectactivitystorage.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\plugins\\runtime\\database\\sqlitecore\\source\\sqlitecore\\public\\sqlitedatabase.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\plugins\\runtime\\database\\sqlitecore\\source\\sqlitecore\\public\\sqlitepreparedstatement.h",
+            "c:\\program files\\epic games\\ue_5.8\\engine\\plugins\\runtime\\database\\sqlitecore\\source\\sqlitecore\\public\\sqlitetypes.h",
+            "c:\\users\\chong\\documents\\unreal projects\\activityvisualizer\\plugins\\projectactivityvisualizer\\source\\projectactivityvisualizer\\public\\projectactivitytypes.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

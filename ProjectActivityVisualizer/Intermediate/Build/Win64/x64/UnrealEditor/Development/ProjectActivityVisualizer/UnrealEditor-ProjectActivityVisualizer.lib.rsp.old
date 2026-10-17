@@ -1,0 +1,17 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/experimental:deterministic
+/DEF
+/NAME:"UnrealEditor-ProjectActivityVisualizer.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Intermediate/Build/Win64/x64/ActivityVisualizerEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.ValExpApi.Cpp20.h.obj"
+"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/Module.ProjectActivityVisualizer.cpp.obj"
+"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/ProjectActivitySettings.cpp.obj"
+"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/ProjectActivityStorage.cpp.obj"
+"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/ProjectActivityVisualizer.cpp.obj"
+"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/ProjectActivityVisualizerCommands.cpp.obj"
+"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/ProjectActivityVisualizerStyle.cpp.obj"
+/OUT:"C:/Users/chong/Documents/Unreal Projects/ActivityVisualizer/Plugins/ProjectActivityVisualizer/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProjectActivityVisualizer/UnrealEditor-ProjectActivityVisualizer.lib"
