@@ -1,0 +1,24 @@
+# Unreal and IDE generated files
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+.vscode/
+*.sln
+*.slnx
+*.suo
+*.VC.db
+*.VC.opendb
+*.opensdf
+*.sdf
+
+# Local activity records and team exchange
+ProjectActivityExchange/
+*.db
+*.db-shm
+*.db-wal
+*.log
+
+# Distribute prebuilt packages as GitHub release assets
+*.zip

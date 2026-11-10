@@ -46,7 +46,10 @@ public class ProjectActivityVisualizer : ModuleRules
 				"Slate",
 				"SlateCore",
 				"AssetRegistry",
-				"ContentBrowser"
+				"ContentBrowser",
+                "Json",
+                "DesktopPlatform",
+                "SourceControl"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
