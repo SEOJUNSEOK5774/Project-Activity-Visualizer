@@ -9,7 +9,7 @@
 
 ## インストール
 
-- **ビルド済みパッケージ：** [GitHub Releases](https://github.com/SEOJUNSEOK5774/Project-Activity-Visualizer/releases) を確認してください。検証済みの 0.1.0 ZIP はアップロード準備中です。ZIP 内の ProjectActivityVisualizer フォルダーをプロジェクトの Plugins フォルダーにコピーします。
+- **ビルド済みパッケージ：** [UE 5.8.4 / Win64 用の 0.1.0 ZIP をダウンロード](https://github.com/SEOJUNSEOK5774/Project-Activity-Visualizer/releases/download/v0.1.0/ProjectActivityVisualizer_0.1.0_UE5.8.4_Win64.zip)。ZIP 内の ProjectActivityVisualizer フォルダーをプロジェクトの Plugins フォルダーにコピーします。
 - **ソース：** このリポジトリの [ProjectActivityVisualizer](ProjectActivityVisualizer) フォルダーをプロジェクトの Plugins フォルダーにコピーします。必要に応じて、互換性のある Unreal Engine C++ ビルド環境でビルドしてください。GitHub が自動生成するソース ZIP にビルド済みバイナリは含まれません。
 - Edit > Plugins で有効にし、Window > ProjectActivityVisualizer を開きます。
 

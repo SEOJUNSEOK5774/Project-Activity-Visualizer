@@ -9,7 +9,7 @@ An Unreal Editor plugin for asset save activity, contributor aliases, current pa
 
 ## Installation
 
-- **Prebuilt package:** see [GitHub Releases](https://github.com/SEOJUNSEOK5774/Project-Activity-Visualizer/releases). The validated 0.1.0 ZIP is prepared for upload. Extract its ProjectActivityVisualizer folder into your project's Plugins folder.
+- **Prebuilt package:** [Download the validated 0.1.0 ZIP for UE 5.8.4 / Win64](https://github.com/SEOJUNSEOK5774/Project-Activity-Visualizer/releases/download/v0.1.0/ProjectActivityVisualizer_0.1.0_UE5.8.4_Win64.zip). Extract its ProjectActivityVisualizer folder into your project's Plugins folder.
 - **Source:** copy this repository's [ProjectActivityVisualizer](ProjectActivityVisualizer) folder into your project's Plugins folder. Build with a compatible Unreal Engine C++ toolchain when required. GitHub's automatic source ZIP does not contain prebuilt binaries.
 - Enable the plugin under Edit > Plugins, then open Window > ProjectActivityVisualizer.
 

@@ -9,7 +9,7 @@
 
 ## 설치
 
-- **빌드된 패키지:** [GitHub Releases](https://github.com/SEOJUNSEOK5774/Project-Activity-Visualizer/releases)를 확인합니다. 검증한 0.1.0 ZIP은 업로드 준비 상태입니다. 압축 안의 ProjectActivityVisualizer 폴더를 프로젝트의 Plugins 폴더에 복사합니다.
+- **빌드된 패키지:** [UE 5.8.4 / Win64용 0.1.0 ZIP 다운로드](https://github.com/SEOJUNSEOK5774/Project-Activity-Visualizer/releases/download/v0.1.0/ProjectActivityVisualizer_0.1.0_UE5.8.4_Win64.zip). 압축을 풀고 ProjectActivityVisualizer 폴더를 프로젝트의 Plugins 폴더에 복사합니다.
 - **소스:** 이 저장소의 [ProjectActivityVisualizer](ProjectActivityVisualizer) 폴더를 프로젝트의 Plugins 폴더에 복사합니다. 필요하면 호환되는 언리얼 C++ 빌드 환경으로 빌드합니다. GitHub가 자동 생성하는 소스 ZIP에는 빌드된 바이너리가 포함되지 않습니다.
 - Edit > Plugins에서 활성화한 뒤 Window > ProjectActivityVisualizer를 엽니다.
 
