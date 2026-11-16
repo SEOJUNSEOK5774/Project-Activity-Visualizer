@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Overview | Project Activity Visualizer</title>
+  <link rel="icon" type="image/svg+xml" href="/crow.svg">
+  <link rel="stylesheet" href="/dashboard.css">
+  <script src="/dashboard.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="PAV, Project Activity Visualizer overview" data-page-link>
+      <span class="brand-mark"><img src="/crow.svg" width="44" height="30" alt=""></span>
+      <span class="brand-copy">
+        <span class="brand-title">PAV</span>
+        <span class="brand-subtitle">Project Activity Visualizer</span>
+      </span>
+    </a>
+    <nav class="sidebar-nav" aria-label="Dashboard">
+      <a href="/" data-page-link><span class="nav-icon nav-overview" aria-hidden="true"></span>Overview</a>
+      <a href="/assets" data-page-link><span class="nav-icon nav-assets" aria-hidden="true"></span>Assets</a>
+      <a href="/collaboration" data-page-link><span class="nav-icon nav-hotspot" aria-hidden="true"></span>Collaboration</a>
+      <a href="/history" data-page-link><span class="nav-icon nav-history" aria-hidden="true"></span>Save History</a>
+      <a href="/edits" data-page-link><span class="nav-icon nav-edits" aria-hidden="true"></span>Edit History</a>
+    </nav>
+  </aside>
+
+  <main id="main-content" class="dashboard" tabindex="-1">
+    <header class="dashboard-header">
+      <h1 id="page-title" tabindex="-1">Overview</h1>
+      <div class="header-tools">
+        <p id="data-source-label" hidden></p>
+        <p id="connection" class="connection" role="status" data-state="connecting">Connecting…</p>
+        <fieldset id="range-days" class="chart-switch range-switch">
+          <legend class="visually-hidden">Activity date range</legend>
+          <label><input class="visually-hidden" type="radio" name="range-days" value="7" checked><span>7 days</span></label>
+          <label><input class="visually-hidden" type="radio" name="range-days" value="30"><span>30 days</span></label>
+        </fieldset>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" hidden>
+          <span class="theme-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div id="local-project" class="local-project" hidden>
+        <dl class="local-project-details">
+          <dt id="project-path-label">Project</dt>
+          <dd id="project-path" class="package-path"></dd>
+        </dl>
+        <p id="editor-connection" class="connection" role="status" data-state="unknown">Unreal Editor · Unknown</p>
+      </div>
+    </header>
+    <noscript><p>Enable JavaScript to load the dashboard.</p></noscript>
+
+    <div id="overview-page" class="dashboard-page" hidden>
+      <div class="overview-grid">
+        <dl class="overview-stats" aria-label="Activity totals for the selected date range">
+          <div class="overview-stat overview-stat-primary">
+            <dt>Activity buckets</dt><dd id="total-buckets">—</dd>
+          </div>
+          <div class="overview-stat">
+            <dt>Save events</dt><dd id="total-saves">—</dd>
+          </div>
+          <div class="overview-stat">
+            <dt>Assets saved</dt><dd id="total-assets">—</dd>
+          </div>
+        </dl>
+
+        <section class="activity-card daily-card" aria-labelledby="daily-heading">
+          <div class="chart-heading">
+            <h2 id="daily-heading">Daily activity</h2>
+            <span id="chart-date-span" class="period-label">UTC</span>
+          </div>
+          <p id="daily-placeholder" class="table-placeholder" role="status">Loading activity…</p>
+          <div id="daily-chart" hidden>
+            <div class="chart-toolbar">
+              <fieldset id="daily-metric" class="chart-switch chart-metric">
+                <legend class="visually-hidden">Chart metric</legend>
+                <label><input class="visually-hidden" type="radio" name="daily-metric" value="activityBucketCount" checked><span>Activity buckets</span></label>
+                <label><input class="visually-hidden" type="radio" name="daily-metric" value="rawSaveCount"><span>Save events</span></label>
+              </fieldset>
+            </div>
+            <p id="daily-chart-keys" class="visually-hidden">Use the left and right arrow keys to inspect dates.</p>
+            <div id="daily-plot" class="daily-plot" tabindex="0" role="group" aria-label="Daily activity buckets chart" aria-describedby="daily-chart-keys">
+              <svg id="daily-svg" aria-hidden="true" focusable="false">
+                <defs>
+                  <linearGradient id="daily-gradient" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="objectBoundingBox">
+                    <stop offset="0%" class="daily-gradient-start"></stop>
+                    <stop offset="100%" class="daily-gradient-end"></stop>
+                  </linearGradient>
+                </defs>
+                <g id="daily-axes"></g>
+                <path id="daily-area" fill="url(#daily-gradient)"></path>
+                <path id="daily-line" class="daily-line" pathLength="1"></path>
+                <g id="daily-highlight" hidden>
+                  <line class="daily-guide"></line>
+                  <circle class="daily-marker-halo" r="8"></circle>
+                  <circle class="daily-marker" r="3.8"></circle>
+                </g>
+              </svg>
+              <div id="daily-tooltip" class="daily-tooltip" aria-hidden="true" hidden>
+                <time></time>
+                <strong></strong>
+              </div>
+            </div>
+            <p id="daily-chart-announcement" class="visually-hidden" role="status"></p>
+            <div class="chart-footer">
+              <p id="daily-note">One activity bucket per asset and alias in each five-minute UTC window.</p>
+              <details class="daily-values">
+                <summary>View data</summary>
+                <div class="daily-table-scroll" tabindex="0" role="region" aria-label="Daily values">
+                  <table class="daily-table" aria-label="Daily activity values">
+                    <thead>
+                      <tr>
+                        <th scope="col">Date (UTC)</th>
+                        <th scope="col">Buckets</th>
+                        <th scope="col">Saves</th>
+                      </tr>
+                    </thead>
+                    <tbody id="daily-rows"></tbody>
+                  </table>
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <section class="activity-card latest-card" aria-labelledby="activity-heading">
+          <div class="panel-heading">
+            <h2 id="activity-heading">Latest activity</h2>
+            <a id="latest-history-link" class="quiet-link" href="/history" data-page-link hidden>View history <span aria-hidden="true">↗</span></a>
+          </div>
+          <p id="placeholder" class="table-placeholder">Loading saves…</p>
+          <div id="activity" hidden>
+            <div class="asset">
+              <p id="asset-name" class="asset-name"></p>
+              <p id="package-path" class="package-path"></p>
+              <button id="latest-asset-references" class="text-button" type="button" aria-controls="asset-detail">View references</button>
+            </div>
+            <dl class="metadata">
+              <div><dt>Activity</dt><dd id="activity-type"></dd></div>
+              <div><dt>Alias</dt><dd id="alias"></dd></div>
+              <div><dt>Saved at</dt><dd><time id="timestamp"></time></dd></div>
+            </dl>
+            <details>
+              <summary>Event ID</summary>
+              <code id="event-id"></code>
+            </details>
+          </div>
+          <ul id="latest-saves" class="latest-saves" aria-label="Previous saves" hidden></ul>
+        </section>
+      </div>
+      <div id="overview-detail-slot"></div>
+    </div>
+
+    <div id="assets-page" class="dashboard-page" hidden>
+      <section class="activity-card table-card" aria-labelledby="top-assets-heading">
+        <div class="panel-heading">
+          <h2 id="top-assets-heading">Most active assets</h2>
+          <span id="top-assets-range" class="period-label">Last 7 days · UTC</span>
+        </div>
+        <p id="top-assets-placeholder" class="table-placeholder">Loading activity…</p>
+        <div id="top-asset-folders" hidden></div>
+        <template id="asset-folder-template">
+          <details class="asset-folder">
+            <summary>
+              <span class="folder-chevron" aria-hidden="true"></span>
+              <span class="nav-icon nav-assets folder-icon" aria-hidden="true"></span>
+              <span class="asset-folder-path"></span>
+              <span class="asset-folder-count"></span>
+            </summary>
+            <table class="asset-table asset-list-table">
+              <thead>
+                <tr>
+                  <th scope="col">Asset</th>
+                  <th scope="col">Buckets</th>
+                  <th scope="col">Saves</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <button class="quiet-button asset-folder-more" type="button" hidden></button>
+          </details>
+        </template>
+      </section>
+      <div id="assets-detail-slot"></div>
+    </div>
+
+    <div id="collaboration-page" class="dashboard-page" hidden>
+      <div class="collaboration-grid">
+        <section class="activity-card table-card" aria-labelledby="shared-assets-heading">
+          <div class="panel-heading"><h2 id="shared-assets-heading">Assets with multiple contributors</h2></div>
+          <p id="shared-assets-placeholder" class="table-placeholder">Loading activity…</p>
+          <table id="shared-assets" class="asset-table asset-list-table" aria-labelledby="shared-assets-heading" hidden>
+            <thead>
+              <tr>
+                <th scope="col">Asset</th>
+                <th scope="col">Aliases</th>
+                <th scope="col">Saves</th>
+              </tr>
+            </thead>
+            <tbody id="shared-assets-rows"></tbody>
+          </table>
+        </section>
+
+        <section class="activity-card table-card hotspot-card" aria-labelledby="hotspot-heading">
+          <div class="panel-heading"><h2 id="hotspot-heading">Hotspot candidates</h2></div>
+          <p id="hotspot-rules" class="panel-note" hidden></p>
+          <p id="hotspot-references" class="panel-note" hidden></p>
+          <p id="hotspot-placeholder" class="table-placeholder">Loading activity…</p>
+          <table id="hotspot-assets" class="asset-table asset-list-table" aria-labelledby="hotspot-heading" aria-describedby="hotspot-rules hotspot-references" hidden>
+            <thead>
+              <tr>
+                <th scope="col">Asset</th>
+                <th scope="col">Buckets</th>
+                <th scope="col">Aliases</th>
+                <th scope="col">Referenced by</th>
+                <th scope="col">Saves</th>
+              </tr>
+            </thead>
+            <tbody id="hotspot-rows"></tbody>
+          </table>
+        </section>
+      </div>
+      <div id="collaboration-detail-slot"></div>
+    </div>
+
+    <div id="history-page" class="dashboard-page" hidden>
+      <section class="activity-card table-card" aria-labelledby="history-heading">
+        <div class="panel-heading">
+          <h2 id="history-heading">Recent saves</h2>
+          <span class="period-label">Latest 10 · UTC</span>
+        </div>
+        <p id="history-placeholder" class="table-placeholder">Loading saves…</p>
+        <table id="history" class="asset-table" aria-labelledby="history-heading" hidden>
+          <thead>
+            <tr>
+              <th scope="col">Asset</th>
+              <th scope="col">Alias</th>
+              <th scope="col">Saved at</th>
+            </tr>
+          </thead>
+          <tbody id="history-rows"></tbody>
+        </table>
+      </section>
+      <div id="history-detail-slot"></div>
+    </div>
+
+    <div id="edits-page" class="dashboard-page" hidden>
+      <section class="activity-card table-card" aria-labelledby="edits-heading">
+        <div class="panel-heading">
+          <h2 id="edits-heading">Recent edits</h2>
+          <span class="period-label">Latest 10 · UTC</span>
+        </div>
+        <p class="panel-note">Each entry records when an asset first gained unsaved changes.</p>
+        <p id="edits-placeholder" class="table-placeholder">Loading edits…</p>
+        <table id="edits" class="asset-table" aria-labelledby="edits-heading" hidden>
+          <thead>
+            <tr>
+              <th scope="col">Asset</th>
+              <th scope="col">Alias</th>
+              <th scope="col">Edited at</th>
+            </tr>
+          </thead>
+          <tbody id="edits-rows"></tbody>
+        </table>
+      </section>
+      <div id="edits-detail-slot"></div>
+    </div>
+  </main>
+
+  <section id="asset-detail" class="activity-card table-card" aria-labelledby="asset-detail-heading" hidden>
+    <div class="panel-heading">
+      <h2 id="asset-detail-heading">Asset details</h2>
+      <button id="close-asset-detail" class="quiet-button" type="button">Close</button>
+    </div>
+    <p id="asset-detail-path" class="package-path"></p>
+    <p id="asset-detail-status" class="table-placeholder" role="status"></p>
+    <section id="asset-reference-detail" aria-labelledby="asset-reference-heading" hidden>
+      <h3 id="asset-reference-heading">Assets referenced by this asset</h3>
+      <p id="asset-reference-status" hidden></p>
+      <p id="asset-open-hint" class="panel-note" hidden>Select a node to open it in Unreal Editor.</p>
+      <div id="asset-reference-graph" role="region" aria-labelledby="asset-reference-heading" tabindex="0" hidden>
+        <div class="reference-layout">
+          <button id="asset-reference-source" class="reference-node reference-source" type="button"></button>
+          <ul id="asset-reference-paths" aria-label="Direct dependencies"></ul>
+        </div>
+      </div>
+      <p id="asset-open-status" class="panel-note" role="status"></p>
+    </section>
+    <table id="asset-alias-table" class="asset-table" hidden>
+      <caption id="asset-alias-caption">Saves by alias</caption>
+      <thead><tr><th scope="col">Alias</th><th scope="col">Saves</th></tr></thead>
+      <tbody id="asset-alias-rows"></tbody>
+    </table>
+    <table id="asset-detail-table" class="asset-table" hidden>
+      <caption id="asset-history-caption">Edit and save timeline</caption>
+      <thead><tr><th scope="col">Time (UTC)</th><th scope="col">Event</th><th scope="col">Alias</th></tr></thead>
+      <tbody id="asset-detail-rows"></tbody>
+    </table>
+  </section>
+</body>
+</html>

@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.2.0 — 2026-11-16
+
+### Added
+
+- Records when a tracked asset first gains unsaved changes and when it is saved. The two events have separate UTC timestamps in the local SQLite database.
+- Windows web dashboard with Overview, Assets, Collaboration, Save History, and Edit History. Asset details show the edit and save timeline.
+- Direct `/Game/` dependency graph with periodic reference refresh. Nodes can open assets in the matching local Unreal Editor after the Python startup script is configured.
+- Team dashboard that imports save events from a shared folder, with example Caddy configuration for private-network HTTPS.
+
+### Changed
+
+- Dark mode uses a black background, warm text, and yellow accents for controls, charts, and references.
+- The local dashboard launcher takes a project or database file so the bundle works from any extraction path.
+
+### Package checks
+
+- Built the Win64 editor package on Unreal Engine 5.8.3 and installed it in a clean Blueprint project.
+- Verified startup script connection, an edit before saving, separate edit and save timestamps, direct dependency export, and opening the referenced asset in the editor.
+
 ## 0.1.0 — release preparation, 2026-11-10
 
 ### Added

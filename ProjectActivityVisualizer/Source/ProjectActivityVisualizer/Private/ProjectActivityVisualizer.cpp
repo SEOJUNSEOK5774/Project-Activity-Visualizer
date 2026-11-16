@@ -452,6 +452,11 @@ void FProjectActivityVisualizerModule::StartupModule()
 
 	PackageSavedDelegateHandle =UPackage::PackageSavedWithContextEvent.AddRaw(this,&FProjectActivityVisualizerModule::OnPackageSaved);
 
+	if (!IsRunningCommandlet())
+	{
+		PackageMarkedDirtyDelegateHandle = UPackage::PackageMarkedDirtyEvent.AddRaw(this, &FProjectActivityVisualizerModule::OnPackageMarkedDirty);
+	}
+
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 	
 	FProjectActivityVisualizerStyle::Initialize();
@@ -496,6 +501,12 @@ void FProjectActivityVisualizerModule::ShutdownModule()
 		UPackage::PackageSavedWithContextEvent.Remove(PackageSavedDelegateHandle);
 
 		PackageSavedDelegateHandle.Reset();
+	}
+
+	if (PackageMarkedDirtyDelegateHandle.IsValid())
+	{
+		UPackage::PackageMarkedDirtyEvent.Remove(PackageMarkedDirtyDelegateHandle);
+		PackageMarkedDirtyDelegateHandle.Reset();
 	}
 
 	if (TSharedPtr<SWindow> OpenWindow = ReferenceDetailsWindow.Pin())
@@ -1046,6 +1057,36 @@ void FProjectActivityVisualizerModule::RegisterMenus()
 			}
 		}
 	}
+}
+
+void FProjectActivityVisualizerModule::OnPackageMarkedDirty(UPackage* Package, bool bWasDirty)
+{
+	if (!IsInGameThread() || Package == nullptr || bWasDirty
+		|| !Package->IsDirty()
+		|| Package->HasAnyPackageFlags(PKG_PlayInEditor)
+		|| UE::IsSavingPackage(Package))
+	{
+		return;
+	}
+
+	const UProjectActivitySettings* Settings = GetDefault<UProjectActivitySettings>();
+	const FString PackagePath = Package->GetName();
+
+	if (!Settings->bEnableActivityCollection || !Settings->ShouldTrackPackage(PackagePath))
+	{
+		return;
+	}
+
+	const FDateTime EditedAtUtc = FDateTime::UtcNow();
+	const FString ContributorAlias = GetDefault<UProjectActivityUserSettings>()->ContributorAlias.TrimStartAndEnd();
+
+	if (!ActivityStorage.InsertPackageEdit(PackagePath, EditedAtUtc, ContributorAlias))
+	{
+		return;
+	}
+
+	const FString TimestampUtc = EditedAtUtc.ToIso8601();
+	UE_LOG(LogProjectActivity, Log, TEXT("Package edit recorded | Package=%s | Utc=%s"), *PackagePath, *TimestampUtc);
 }
 
 void FProjectActivityVisualizerModule::OnPackageSaved(const FString& PackageFileName , UPackage* Package , FObjectPostSaveContext SaveContext)

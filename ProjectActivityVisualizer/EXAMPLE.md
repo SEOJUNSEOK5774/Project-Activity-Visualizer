@@ -2,11 +2,11 @@
 
 [English](EXAMPLE.md) | [日本語](EXAMPLE.ja.md) | [한국어](EXAMPLE.ko.md)
 
-[Installation and metric definitions](README.md) | [Changes in 0.1.0](CHANGELOG.md)
+[Installation and metric definitions](README.md) | [Changelog](CHANGELOG.md)
 
 This walkthrough creates a small example inside your own project. No sample .uproject, .uasset, activity database, or Git repository is bundled with this guide.
 
-The packaged plugin was smoke-tested on Windows 64-bit with Unreal Engine 5.8.4. Use a separate test project for this walkthrough if your existing project already has activity records or customized collection rules.
+The editor workflows below were checked with 0.1.0 on Windows x64 and Unreal Engine 5.8.4. See the README for the current package and its web dashboard. Use a separate test project for this walkthrough if your existing project already has activity records or customized collection rules.
 
 ## 1. Prepare the project
 

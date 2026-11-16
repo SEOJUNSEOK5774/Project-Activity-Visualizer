@@ -18,6 +18,8 @@ public:
     // 활동 기록 하나를 DB에 저장한다.
     bool InsertRecord(const FProjectActivityRecord& Record);
 
+    bool InsertPackageEdit(const FString& PackagePath, const FDateTime& EditedAtUtc, const FString& ContributorAlias);
+
     // 전체 활동 기록을 JSON 파일로 내보낸다.
     bool ExportAllRecordsToJson( const FString& FilePath, int64& OutRecordCount);
 

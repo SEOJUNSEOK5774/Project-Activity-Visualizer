@@ -1,0 +1,24 @@
+{
+	admin off
+	auto_https disable_redirects
+	skip_install_trust
+	storage file_system ./caddy-data
+
+	servers {
+		protocols h1 h2
+	}
+}
+
+https://{$AV_TEAM_IP}:8443 {
+	bind {$AV_TEAM_IP}
+	tls internal
+
+	basic_auth bcrypt "Project Activity" {
+		import team-users.caddy
+	}
+
+	reverse_proxy 127.0.0.1:8767 {
+		header_up Host {upstream_hostport}
+		header_up -Authorization
+	}
+}

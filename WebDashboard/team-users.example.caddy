@@ -1,0 +1,3 @@
+# Copy this file to team-users.caddy.
+# Add one username and the output of caddy hash-password on each line.
+# Use a separate account for each team member.

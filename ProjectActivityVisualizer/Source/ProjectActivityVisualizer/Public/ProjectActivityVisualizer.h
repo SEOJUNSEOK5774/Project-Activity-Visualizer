@@ -34,6 +34,8 @@ private:
 
     void OnPackageSaved(const FString& PackageFileName , UPackage* Package , FObjectPostSaveContext SaveContext);
 
+    void OnPackageMarkedDirty(UPackage* Package, bool bWasDirty);
+
     // DB를 조회해서 화면의 기록 개수를 갱신한다.
     void RefreshDashboard();
 
@@ -88,6 +90,8 @@ private:
     TSharedPtr<class FUICommandList> PluginCommands;
 
     FDelegateHandle PackageSavedDelegateHandle;
+
+    FDelegateHandle PackageMarkedDirtyDelegateHandle;
 
     FProjectActivityStorage ActivityStorage;
 

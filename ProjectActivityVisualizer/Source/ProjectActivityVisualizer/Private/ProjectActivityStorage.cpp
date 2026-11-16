@@ -148,6 +148,23 @@ bool FProjectActivityStorage::Initialize()
         return false;
     }
 
+    const TCHAR* CreatePackageEditSql =
+        TEXT("CREATE TABLE IF NOT EXISTS PackageEdit (")
+        TEXT("EventId TEXT PRIMARY KEY NOT NULL, ")
+        TEXT("PackagePath TEXT NOT NULL, ")
+        TEXT("TimestampUtc TEXT NOT NULL, ")
+        TEXT("ContributorAlias TEXT NOT NULL DEFAULT ''")
+        TEXT(");");
+
+    if (!Database.Execute(CreatePackageEditSql))
+    {
+        UE_LOG(LogProjectActivityStorage, Error,
+            TEXT("Failed to create PackageEdit table: %s"), *Database.GetLastError());
+
+        Close();
+        return false;
+    }
+
     UE_LOG(LogProjectActivityStorage, Log, TEXT("Activity database ready: %s"), *DatabasePath);
 
     return true;
@@ -201,6 +218,37 @@ bool FProjectActivityStorage::InsertRecord(const FProjectActivityRecord& Record)
     {
         UE_LOG( LogProjectActivityStorage, Error, TEXT("Failed to insert activity: %s"), *Database.GetLastError());
 
+        return false;
+    }
+
+    return true;
+}
+
+bool FProjectActivityStorage::InsertPackageEdit(const FString& PackagePath, const FDateTime& EditedAtUtc, const FString& ContributorAlias)
+{
+    if (!Database.IsValid())
+    {
+        UE_LOG(LogProjectActivityStorage, Error, TEXT("Cannot record package edit: database is not open."));
+        return false;
+    }
+
+    const TCHAR* InsertSql =
+        TEXT("INSERT INTO PackageEdit ")
+        TEXT("(EventId, PackagePath, TimestampUtc, ContributorAlias) ")
+        TEXT("VALUES (?1, ?2, ?3, ?4);");
+
+    const FString EventId = FGuid::NewGuid().ToString(EGuidFormats::DigitsWithHyphens);
+    const FString TimestampUtc = EditedAtUtc.ToIso8601();
+
+    FSQLitePreparedStatement Statement;
+    if (!Statement.Create(Database, InsertSql)
+        || !Statement.SetBindingValueByIndex(1, EventId)
+        || !Statement.SetBindingValueByIndex(2, PackagePath)
+        || !Statement.SetBindingValueByIndex(3, TimestampUtc)
+        || !Statement.SetBindingValueByIndex(4, ContributorAlias)
+        || !Statement.Execute())
+    {
+        UE_LOG(LogProjectActivityStorage, Error, TEXT("Failed to record package edit for %s: %s"), *PackagePath, *Database.GetLastError());
         return false;
     }
 
@@ -286,8 +334,7 @@ bool FProjectActivityStorage::ExportAllRecordsToJson(const FString& FilePath, in
         JsonRecords.Add(MakeShared<FJsonValueObject>(RecordObject));
     }
 
-    TSharedRef<FJsonObject> RootObject =
-        MakeShared<FJsonObject>();
+    TSharedRef<FJsonObject> RootObject = MakeShared<FJsonObject>();
 
     RootObject->SetStringField(TEXT("Format") , TEXT("ProjectActivityVisualizer"));
 

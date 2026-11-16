@@ -20,5 +20,11 @@ ProjectActivityExchange/
 *.db-wal
 *.log
 
+# Local web dashboard runtime files
+__pycache__/
+/WebDashboard/caddy.exe
+/WebDashboard/caddy-data/
+/WebDashboard/team-users.caddy
+
 # Distribute prebuilt packages as GitHub release assets
 *.zip

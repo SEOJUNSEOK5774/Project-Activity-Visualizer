@@ -2,22 +2,24 @@
 
 [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-**Target version:** 0.1.0  
-**Release status:** Listed package smoke tests passed; release preparation in progress
+**Version** 0.2.0
 
-An Unreal Editor plugin that records asset save events and brings activity statistics, contributor aliases, package references, and Git history into one dashboard.
+An Unreal Editor plugin that records asset saves and unsaved edits. View activity statistics, contributor aliases, package references, and Git history in the editor, or follow edits and saves in the local web dashboard.
 
 ## Environment
 
-- Package smoke-test environment: Windows 64-bit / Unreal Engine 5.8.4.
+- Prebuilt editor package for Windows x64 and Unreal Engine 5.8.3.
 - Editor-only C++ plugin.
 - Depends on the engine's SQLiteCore plugin, declared in the plugin descriptor.
 - Git features require a Git installation, a local repository, and a connected Git Provider in Unreal Editor.
-- Other engine versions and operating systems have not been validated.
 
-## Package validation (2026-11-10)
+## 0.2.0 package validation (2026-11-16)
 
-The prebuilt Win64 Editor package was installed in a separate Blueprint project. The following checks passed through manual testing and review of the available build and editor logs.
+BuildPlugin produced the Win64 Editor package on Unreal Engine 5.8.3. A clean Blueprint project loaded the package, created a local activity database, and connected to the dashboard through the configured Python startup script. The test confirmed an edit before saving, a separate save timestamp, a direct Blueprint dependency, and opening its target in the editor.
+
+## 0.1.0 package validation (2026-11-10)
+
+The 0.1.0 Win64 package was installed in a separate Blueprint project using Unreal Engine 5.8.4. The following checks passed through manual testing and review of the available build and editor logs.
 
 | Check | Observed result |
 | --- | --- |
@@ -62,7 +64,7 @@ Use an engine-compatible package when installing prebuilt binaries.
 
 Changing an alias affects new records; it does not rename existing records. Disabling collection keeps previously stored records available.
 
-## Dashboard
+## Editor dashboard
 
 | Tab | Contents |
 | --- | --- |
@@ -82,6 +84,17 @@ Click Show History beside a package on the Activity tab to query it and open the
 Filtered windows end at the last dashboard refresh and use UTC. They apply to activity counts, category statistics, package rankings, alias statistics, and the activity evidence used by Hotspot rules.
 
 The daily chart always displays the most recent seven UTC dates, including a partial current date. Package references use current saved package data. Selected asset history is independent of the activity time filter.
+
+## Web dashboard
+
+The release ZIP includes a `WebDashboard` folder next to `ProjectActivityVisualizer`. The web dashboard runs on Windows with Python 3.9 or later.
+
+1. Open your project with the plugin enabled and save a tracked asset. Drop the project's `.uproject` file onto `WebDashboard/Start-Local.cmd`. In the browser, check the **Project** path.
+2. Change a saved asset and look for it in **Edit History** before saving. After you save, open its details to see **Edit detected** and **Saved** with separate timestamps.
+3. For references and asset opening, enable **Python Editor Script Plugin**. In **Edit → Project Settings → Plugins → Python → Startup Scripts**, add the full path to `WebDashboard/auto_export_asset_references.py` from your extracted ZIP. Restart the editor and check for **Unreal Editor · Connected**.
+4. Select an asset in **Save History** or **Edit History**. The graph shows its direct `/Game/` dependencies. Select a node to open that asset in the same editor.
+
+See `WebDashboard/README.md` for the demo, dashboard controls, and team setup.
 
 ## Interpreting the metrics
 
@@ -103,9 +116,9 @@ The plugin creates its SQLite database inside the project:
 Saved/ProjectActivity/activity.db
 ~~~
 
-It stores activity events and the latest source control lookup snapshot for each package. A new successful lookup updates that package's snapshot. Reading a cached result does not change its fetch time.
+It stores asset saves, the first edit that makes an asset unsaved, and the latest source control lookup snapshot for each package. A new successful lookup updates that package's snapshot. Reading a cached result does not change its fetch time.
 
-Export all JSON exports all stored activity events regardless of the selected dashboard range. Activity JSON does not include the source control snapshot cache.
+**Export all JSON** exports stored save events across all dates. Edit history and source control snapshots are stored in the local database.
 
 ## Team JSON exchange
 
@@ -130,8 +143,3 @@ SourceControl: Error: fatal: Invalid path '/Temp': No such file or directory
 The error also reproduced with Project Activity Visualizer disabled while the Git Provider remained enabled. Reproduction therefore does not require this plugin. The specific cause in the editor, Git Provider, or project setup has not been isolated, and no fix has been confirmed.
 
 The Git history and cache checks listed above passed in the same test environment. This release records the error as a known issue; it does not claim to resolve it.
-
-## Current scope
-
-Activity is recorded when assets are saved. Unsaved editing time and idle editor time are not tracked. The real-time web dashboard and editing detection are planned follow-up features.
-

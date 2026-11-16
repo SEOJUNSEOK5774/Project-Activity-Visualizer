@@ -2,23 +2,26 @@
 
 [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-アセットの保存活動、コントリビューターの別名、現在のパッケージ参照、Hotspot 確認候補、Git 履歴を表示する Unreal Editor 用プラグインです。
+アセットの保存と編集を検知し、コントリビューターの別名、パッケージの参照関係、Hotspot 確認候補、Git 履歴を表示する Unreal Editor 用プラグインです。ローカル Web ダッシュボードでは編集と保存を一つのタイムラインで確認できます。
 
-**バージョン：** 0.1.0  
-**パッケージの検証環境：** Windows 64 ビット / Unreal Engine 5.8.4
+**バージョン** 0.2.0
+
+**パッケージの検証環境** Windows x64 / Unreal Engine 5.8.3
 
 ## インストール
 
-- **ビルド済みパッケージ：** [UE 5.8.4 / Win64 用の 0.1.0 ZIP をダウンロード](https://github.com/SEOJUNSEOK5774/Project-Activity-Visualizer/releases/download/v0.1.0/ProjectActivityVisualizer_0.1.0_UE5.8.4_Win64.zip)。ZIP 内の ProjectActivityVisualizer フォルダーをプロジェクトの Plugins フォルダーにコピーします。
+- [UE 5.8.3 / Win64 用の 0.2.0 ZIP をダウンロード](https://github.com/SEOJUNSEOK5774/Project-Activity-Visualizer/releases/download/v0.2.0/ProjectActivityVisualizer-0.2.0-UE5.8.3-Win64.zip)。展開した `ProjectActivityVisualizer` フォルダーをプロジェクトの `Plugins` フォルダーにコピーします。
 - **ソース：** このリポジトリの [ProjectActivityVisualizer](ProjectActivityVisualizer) フォルダーをプロジェクトの Plugins フォルダーにコピーします。必要に応じて、互換性のある Unreal Engine C++ ビルド環境でビルドしてください。GitHub が自動生成するソース ZIP にビルド済みバイナリは含まれません。
 - Edit > Plugins で有効にし、Window > ProjectActivityVisualizer を開きます。
+- Windows に Python 3.9 以降をインストールし、追跡対象のアセットを保存します。プロジェクトの `.uproject` を `WebDashboard/Start-Local.cmd` にドラッグすると Web ダッシュボードが開きます。
 
 ## ドキュメント
 
 - [インストール・設定・指標とパッケージ検証結果](ProjectActivityVisualizer/README.ja.md)
 - [使用例](ProjectActivityVisualizer/EXAMPLE.ja.md)
-- [0.1.0 の変更履歴](ProjectActivityVisualizer/CHANGELOG.md)
-- [リリース説明の原稿と ZIP チェックサム](docs/RELEASE_NOTES_0.1.0.md)
+- [Web ダッシュボードの設定](WebDashboard/README.md)
+- [変更履歴](ProjectActivityVisualizer/CHANGELOG.md)
+- [0.2.0 のリリースノートと ZIP チェックサム](docs/RELEASE_NOTES_0.2.0.md)
 - [当初の企画書](docs/PROJECT_PLAN.md) — 設計案として保存しています。実装済みの動作については最新の使用ドキュメントを参照してください。
 
 ## 現在の実装範囲
@@ -27,4 +30,4 @@
 
 別のブループリントプロジェクトで、ドキュメントに記載したパッケージ検証項目に合格しました。Git の Invalid path '/Temp' エラーはこのプラグインを無効にしても再現し、具体的な原因と解決方法は未確認です。検証範囲と既知の問題は詳細ドキュメントを参照してください。
 
-次の開発対象はリアルタイムのチーム Web ダッシュボードで、その後に編集検知を予定しています。どちらも 0.1.0 には含まれません。ライセンスは当初の企画書に記載したとおり未定です。
+Web ダッシュボードはアセットが最初に未保存状態になった時刻と、その後の保存時刻を個別に表示します。Python 起動スクリプトを設定すると、直接参照するアセットをグラフから Unreal Editor で開けます。ライセンスは当初の企画書に記載したとおり未定です。

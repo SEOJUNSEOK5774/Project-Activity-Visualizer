@@ -2,23 +2,26 @@
 
 [English](README.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
-An Unreal Editor plugin for asset save activity, contributor aliases, current package references, Hotspot review candidates, and Git history.
+An Unreal Editor plugin for asset saves, edit detection, contributor aliases, current package references, Hotspot review candidates, and Git history. The local web dashboard shows editing and saves in the same timeline.
 
-**Version:** 0.1.0  
-**Tested package environment:** Windows 64-bit / Unreal Engine 5.8.4
+**Version** 0.2.0
+
+**Tested package environment** Windows x64 / Unreal Engine 5.8.3
 
 ## Installation
 
-- **Prebuilt package:** [Download the validated 0.1.0 ZIP for UE 5.8.4 / Win64](https://github.com/SEOJUNSEOK5774/Project-Activity-Visualizer/releases/download/v0.1.0/ProjectActivityVisualizer_0.1.0_UE5.8.4_Win64.zip). Extract its ProjectActivityVisualizer folder into your project's Plugins folder.
+- [Download the 0.2.0 ZIP for UE 5.8.3 / Win64](https://github.com/SEOJUNSEOK5774/Project-Activity-Visualizer/releases/download/v0.2.0/ProjectActivityVisualizer-0.2.0-UE5.8.3-Win64.zip). Copy the extracted `ProjectActivityVisualizer` folder into your project's `Plugins` folder.
 - **Source:** copy this repository's [ProjectActivityVisualizer](ProjectActivityVisualizer) folder into your project's Plugins folder. Build with a compatible Unreal Engine C++ toolchain when required. GitHub's automatic source ZIP does not contain prebuilt binaries.
 - Enable the plugin under Edit > Plugins, then open Window > ProjectActivityVisualizer.
+- On Windows with Python 3.9 or later, save a tracked asset and drag the project's `.uproject` onto `WebDashboard/Start-Local.cmd` to open the local dashboard.
 
 ## Documentation
 
 - [Installation, setup, metrics, and package validation](ProjectActivityVisualizer/README.md)
 - [Example walkthrough](ProjectActivityVisualizer/EXAMPLE.md)
-- [0.1.0 changelog](ProjectActivityVisualizer/CHANGELOG.md)
-- [Prepared release notes and ZIP checksum](docs/RELEASE_NOTES_0.1.0.md)
+- [Web dashboard setup](WebDashboard/README.md)
+- [Changelog](ProjectActivityVisualizer/CHANGELOG.md)
+- [0.2.0 release notes and ZIP checksum](docs/RELEASE_NOTES_0.2.0.md)
 - [Original project plan](docs/PROJECT_PLAN.md) — archived design proposal; use the current documentation for implemented behavior.
 
 ## Current scope
@@ -27,4 +30,4 @@ The plugin records save events in local SQLite storage, groups repeated saves in
 
 The listed package checks passed in a separate Blueprint project. Git may emit an Invalid path '/Temp' error that also reproduces with this plugin disabled; its specific cause and a fix remain unconfirmed. See the full documentation for test scope and known issues.
 
-The next planned work is a real-time team web dashboard, followed by editing detection. Neither feature is included in 0.1.0. License selection remains pending as recorded in the original plan.
+The dashboard shows the first unsaved edit and subsequent saves with separate timestamps. With the Python startup script configured, it also shows direct dependencies and opens them in Unreal Editor. License selection remains pending as recorded in the original plan.

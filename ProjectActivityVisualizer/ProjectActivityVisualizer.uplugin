@@ -1,9 +1,9 @@
 {
 	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "0.1.0",
+	"Version": 2,
+	"VersionName": "0.2.0",
 	"FriendlyName": "Project Activity Visualizer",
-	"Description": "Editor dashboard for asset save activity, contributor aliases, package references and Git history.",
+	"Description": "Editor dashboard for asset saves, edit detection, contributor aliases, package references and Git history.",
 	"Category": "Editor Tools",
 	"CreatedBy": "SEO_JUNSEOK",
 	"CreatedByURL": "",
